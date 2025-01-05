@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Explore Your Favorite Blogs
+{% endblock title %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/post_list.css' %}">
+
+{% endblock link %}
+
+{% block content %}
+<div class="container">
+    {% if edit_requests|length != 0 %}
+        <h1>Explore Your Favorite Blogs...</h1>
+    {% else %}
+        <h1>No Data Available....</h1>
+    {% endif %}
+    {% for edit_request in edit_requests %}
+    <div class="post">
+        <a href="{% url 'post_detail' pk=edit_request.post.pk %}">
+            <h2 class="post-title">{{ edit_request.post.title }}</h2>
+        </a>
+        <p class="post-content">{{ edit_request.post.content }}</p>
+        <a href="{% url 'post_list' %}?usercode={{ edit_request.post.author.pk }}">
+            <div class="post-author">
+                <img src="{{ edit_request.post.author.profile_picture.url }}" alt="{{ edit_request.post.author.username }}" class="author-img">
+                <span>{{ edit_request.post.author }}</span>
+            </div>
+        </a>
+        <p class="post-date">Published on: {{ edit_request.post.created_at }}</p>
+        <span class="post-views">Views: {{ edit_request.post.views }}</span> <br />
+        <p  class="post-content">Status: {{ edit_request.status }}</p >
+        {% if edit_request.requested != request.user %}
+            {% if edit_request.status == "open" %}
+                <a href="{% url 'post_edit_access' edit_request.post.pk %}?requested={{ edit_request.requested.pk }}&status=Given">
+                    <h2 class="post-content">Approve {{ edit_request.requested }} to Edit</h2>
+                </a>
+            {% else %}
+                <h2 class="post-content">Approved {{ edit_request.requested }} to Edit</h2>
+            {% endif %}
+        {% else %}
+            {% if edit_request.status == "open" %}
+                <h2 class="post-content">Approve Pending from {{ edit_request.author }}</h2>
+            {% elif edit_request.status == "Closed" %}
+                <h2 class="post-content">Edited Successfully</h2>
+            {% else %}
+                <a href="{% url 'post_update' edit_request.post.pk %}?status=Given">
+                    <h2 class="post-content">{{ edit_request.author }} Approved. Continue to Edit</h2>
+                </a>            
+            {% endif %}
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
