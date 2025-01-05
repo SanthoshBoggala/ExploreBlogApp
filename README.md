@@ -36,11 +36,11 @@ This project is built using Django's MTV (Model-Template-View) architecture and 
 ---
 
 ## Projects Images
-![My Blogs](ExploreBlogApp/ExploreBlog/media/assets/my_blogs.png)
-![Create Blog](ExploreBlogApp/ExploreBlog/media/assets/create_blog.png)
-![Blog Page](ExploreBlogApp/ExploreBlog/media/assets/blog_view.png)
-![I Requested Blog Access](ExploreBlogApp/ExploreBlog/media/assets/i_requested.png)
-![Requested My Access](ExploreBlogApp/ExploreBlog/media/assets/requested_me.png)
+![My Blogs](ExploreBlog/media/assets/my_blogs.png)
+![Create Blog](ExploreBlog/media/assets/create_blog.png)
+![Blog Page](ExploreBlog/media/assets/blog_view.png)
+![I Requested Blog Access](ExploreBlog/media/assets/i_requested.png)
+![Requested My Access](ExploreBlog/media/assets/requested_me.png)
 
 ---
 
